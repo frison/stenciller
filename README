@@ -1,0 +1,23 @@
+Stenciller
+==============
+
+With stenciller, you will build a template variable swapper that can be
+applied to multiple strings. It is used in production for customizable
+subject-lines and body sections in a mass-emailer.
+
+Example
+=======
+
+# This is an illustration of application, not a working example
+
+contact = User.first
+stencil = Stenciller::Builder.new
+stencil.append_property_set(contact, :exclusions => User::UNSAFE_FOR_STENCIL)
+stencil.append_property_set(pretty_dates)  # Some 'nice' dates for inside emails
+stencil.append_property_set(special_links) # A set of tracker urls
+
+@subject     = "#{stencil.draw(newsletter.subject)}"
+body[:content] = stencil.draw(newsletter.content)
+
+
+Copyright (c) 2010 Timothy Frison (tim@frison.ca), released under the MIT license
